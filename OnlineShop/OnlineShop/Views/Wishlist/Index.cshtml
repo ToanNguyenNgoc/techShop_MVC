@@ -1,0 +1,72 @@
+﻿@model List<OnlineShop.Models.WishlistItem>
+
+@{
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script>
+        var wishlist = {
+            init: function () {
+                wishlist.regEvents();
+            },
+            regEvents: function () {
+                $('.btn-delete').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        data: { id: $(this).data('id') },
+                        url: '/Wishlist/Delete',
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/danh-sach-yeu-thich";
+                            }
+                        }
+                    })
+                });
+            }
+        }
+        wishlist.init();
+    </script>    
+}
+<!--Danh sach san pham yeu thich-->
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button>Wishlist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section group">
+            @foreach (var item in Model)
+            {
+                var url = "/chi-tiet/" + item.Product.MetaTitle + "-" + item.Product.ID;
+                <div class="grid_1_of_5 images_1_of_5" style="width:200px; height:220px">
+                    <div class="products-single fix">
+                        <div class="box-img-hover" style="height:180px">
+                            <img src="@item.Product.Image" class="img-fluid" alt="" />
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="@url" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-id="@item.Product.ID" class="btn-delete" data-toggle="tooltip" data-placement="right" title="Remove to list"><i class="fas fa-trash"></i></a></li>
+                                    <li>
+                                        <a href="/them-gio-hang?productId=@item.Product.ID&quantity=1" data-toggle="tooltip" data-placement="right" title="Add to cart"><i class="fas fa-cart-plus"></i></a>
+                                    </li>
+
+                                </ul>
+                                <a class="cart" href="@url">@(item.Product.Price.HasValue ? item.Product.Price.Value.ToString("N0") : "Liên hệ")</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h2><a style="font-size:15px" href="@url">@item.Product.Name</a></h2>
+                </div>
+            }
+        </div>
+    </div>
+</div>

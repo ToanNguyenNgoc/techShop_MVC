@@ -1,0 +1,45 @@
+﻿@model Model.EF.Feedback
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Phản hồ từ @Html.DisplayFor(model => model.Name)</h1>
+    </div>
+}
+    
+@section scripts{
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        ×
+                    </button>
+                    <span class="glyphicon glyphicon-ok"></span> <strong>@Html.DisplayFor(model => model.Name)</strong>
+                    <hr class="message-inner-separator">
+                    <p>
+                        @Html.DisplayFor(model => model.Content)
+                    </p>
+                    <hr class="message-inner-separator" />
+                    <p><strong>Ngày:</strong>@Html.DisplayFor(model => model.CreatedDate)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

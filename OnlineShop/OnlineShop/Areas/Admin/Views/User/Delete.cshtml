@@ -1,0 +1,76 @@
+﻿@model Model.EF.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    @section header{
+        
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Thông tin người dùng</h1>
+        </div>
+    }
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên tài khoản: @Html.DisplayFor(model => model.UserName)
+            </dt>
+            <dt>
+                Họ và tên:@Html.DisplayFor(model => model.Name)
+            </dt>
+            <dt>
+                Địa chỉ: @Html.DisplayFor(model => model.Address)
+            </dt>
+            <dt>
+                Email:@Html.DisplayFor(model => model.Email)
+            </dt>
+            <dt>
+                Số điện thoại: @Html.DisplayFor(model => model.Phone)
+
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProvinceID): @Html.DisplayFor(model => model.ProvinceID)
+            </dt>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DistrictID): @Html.DisplayFor(model => model.DistrictID)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate):@Html.DisplayFor(model => model.CreatedDate)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy): @Html.DisplayFor(model => model.CreatedBy)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedDate):@Html.DisplayFor(model => model.ModifiedDate)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy): @Html.DisplayFor(model => model.ModifiedBy)
+            </dt>
+            <dt>
+                Trạng thái: @Html.DisplayFor(model => model.Status)
+            </dt>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Xóa</button>
+            </div>
+        }
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

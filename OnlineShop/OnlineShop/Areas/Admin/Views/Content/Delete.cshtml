@@ -1,0 +1,56 @@
+﻿@model Model.EF.Content
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @section header{
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Xóa thông tin nội dung!</h1>
+        </div>
+        }
+</head>
+<body>
+    <div class="p-5">
+        <form class="zmdi-delete">
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <h1 class="h4 text-black-50 mb-2">
+                        Tên nội dung:
+                        @Html.DisplayFor(model => model.Name)
+                    </h1>
+                </div>
+                <div class="col-sm-3">
+                    <h1 class="h4 text-black-50 mb-2">
+                        Tên tiêu đề:
+                        @Html.DisplayFor(model => model.MetaTitle)
+                    </h1>
+                </div>
+                <div class="col-sm-3">
+                    <h1 class="h4 text-black-50 mb-2">
+                        Mô tả:
+                        @Html.DisplayFor(model => model.Description)
+                    </h1>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">Xóa</button>
+        </div>
+    }
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

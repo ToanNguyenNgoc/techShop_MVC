@@ -1,0 +1,247 @@
+﻿
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Free Movies Store Website Template | Home :: w3layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Assets/Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Assets/Client/css/slider.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="~/Assets/Client/text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script type="~/Assets/Client/text/javascript" src="js/move-top.js"></script>
+    <script type="~/Assets/Client/text/javascript" src="js/easing.js"></script>
+    <script type="~/Assets/Client/text/javascript" src="js/jquery.nivo.slider.js"></script>
+    <script type="~/Assets/Client/text/javascript">
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+    </script>
+    <!---------New---------------------->
+    <link rel="shortcut icon" href="~/Assets/Client1/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/Assets/Client1/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Assets/Client1/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/Assets/Client1/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/Assets/Client1/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/Assets/Client1/css/custom.css">
+    <!---------New---------------------->
+</head>
+<body>
+    <!--=========================================================================-->
+    <div class="main-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="right-phone-box">
+                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    </div>
+                    <div class="our-link">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
+                            <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="login-box">
+                        @{
+                            Html.RenderAction("TopMenu", "TrangChu");
+                        }
+                    </div>
+                    <div class="text-slid-box">
+                        <div id="offer-box" class="carouselTicker">
+                            <ul class="offer-box">
+                                <li>
+                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index","TrangChu")"><img src="~/Assets/Client1/images/logo1.jpg" class="logo" alt=""></a>
+                </div>
+                <!-- End Header Navigation -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <div class="search_box">
+                            <form action="/tim-kiem" method="get">
+                                <input type="text" id="txtKeyword" name="keyword" placeholder="Search..."/>
+                                <button class="fa fa-search" type="submit"></button>
+                                
+                            </form>
+                            
+                        </div>
+                        @{
+                            Html.RenderAction("MainMenu", "TrangChu");
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+                                @RenderSection("Menu", required: false)
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+                <!-- Start Atribute Navigation -->
+                @{
+                    Html.RenderAction("HeaderCart", "TrangChu");
+                }
+                <!-- End Atribute Navigation -->
+            </div>
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- Start Top Search -->
+    <!-- End Top Search -->
+    <!-- Start Slider -->
+    @RenderSection("slide", required: false)
+    <!-- End Slider -->
+    <!-- Start Categories  -->
+    <!-- End Categories -->
+    <!-- Start Products  -->
+    @RenderBody()
+    <!-- End Products  -->
+    <!-- Start Footer  -->
+    <footer>
+        <div class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                            <h3>Business Time</h3>
+                            <ul class="list-time">
+                                <li>Monday - Friday: 08.00am to 05.00pm</li>
+                                <li>Saturday: 10.00am to 08.00pm</li>
+                                <li>Sunday: <span>Closed</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                            <h3>Newsletter</h3>
+                            <form class="newsletter-box">
+                                <div class="form-group">
+                                    <input class="" type="email" name="Email" placeholder="Email Address*" />
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <button class="btn hvr-hover" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                            <h3>Social Media</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-widget">
+                            <h4>About Freshshop</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link">
+                            <h4>Information</h4>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Our Sitemap</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Delivery Information</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link-contact">
+                            <h4>Contact Us</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer  -->
+    <!-- End Main Top -->
+    <!--=========================================================================-->
+    <script type="text/javascript">
+    $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });</script>
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+    <script src="~/Assets/Client/js/Controller/Search.js"></script>
+
+
+
+
+    <!-- ALL JS FILES -->
+    <script src="~/Assets/Client1/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Assets/Client1/js/popper.min.js"></script>
+    <script src="~/Assets/Client1/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="~/Assets/Client1/js/jquery.superslides.min.js"></script>
+    <script src="~/Assets/Client1/js/bootstrap-select.js"></script>
+    <script src="~/Assets/Client1/js/inewsticker.js"></script>
+    <script src="~/Assets/Client1/js/bootsnav.js."></script>
+    <script src="~/Assets/Client1/js/images-loded.min.js"></script>
+    <script src="~/Assets/Client1/js/isotope.min.js"></script>
+    <script src="~/Assets/Client1/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/Client1/js/baguetteBox.min.js"></script>
+    <script src="~/Assets/Client1/js/form-validator.min.js"></script>
+    <script src="~/Assets/Client1/js/contact-form-script.js"></script>
+    <script src="~/Assets/Client1/js/custom.js"></script>
+
+
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

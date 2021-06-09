@@ -1,0 +1,25 @@
+﻿@model List<OnlineShop.Models.CartItem>
+
+@*<div class="cart">
+   
+    <p>
+        <span><a href="">Giỏ hàng - ( sản phẩm)</a></span>
+        
+        <div id="dd" class="wrapper-dropdown-2">
+            <ul class="dropdown">
+                <li>Bạn có @Model.Count sản phẩn trong giỏ hàng</li>
+            </ul>
+        </div>
+    </p>
+</div>*@
+<div class="attr-nav">
+    <ul>
+        <li class="side-menu">
+            <a href="@Url.Action("Index","Cart")">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="badge">@Model.Count</span>
+                <p>My Cart</p>
+            </a>
+        </li>
+    </ul>
+</div>

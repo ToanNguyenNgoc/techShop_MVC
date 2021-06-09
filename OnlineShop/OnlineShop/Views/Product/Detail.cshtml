@@ -1,0 +1,115 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    var recommenProduct = (List<Model.EF.Product>)ViewBag.RecommenProduct;
+}
+@section Menu{
+    <div class="header_bottom_left">
+        <div class="categories">
+            <ul>
+                @{
+                    Html.RenderAction("ProductCategory", "Product");
+                }
+            </ul>
+        </div>
+    </div>
+}
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active"> <img class="d-block w-100" src="@Model.Image" alt="First slide"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-6">
+                <div class="single-product-details">
+                    <h2>@Model.Name</h2>
+                    <h5>
+                        <del>
+                            @(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")
+                        </del>
+                        @(Model.PromotionPrice.HasValue ? Model.PromotionPrice.Value.ToString("N0") : "Liên hệ")
+                    </h5>
+                    <p class="available-stock"><span> More than @Model.Quantity available</span><p>
+                        <h4>Short Description:</h4>
+                    <p>@Model.Description</p>
+                    <h4>Detail:</h4>
+                    <p>@Model.Detail</p>
+                    <div class="price-box-bar">
+                        <div class="cart-and-bay-btn">
+                            <a class="btn hvr-hover" data-fancybox-close="" href="@Url.Action("Index","Cart")">My Cart</a>
+                            <a class="btn hvr-hover" data-fancybox-close="" href="/them-gio-hang?productId=@Model.ID&quantity=1">Add to cart</a>
+                            <a class="btn hvr-hover" data-fancybox-close="" href="/them-vao-danh-sach-yeu-thich?productId=@Model.ID&quantity=1">Add to wishlist</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Shop Detail-->
+@*<div class="wrap">
+        <div class="content_top">
+            <div class="back-links">
+                <p><a href="/">Trang chủ</a> &gt;&gt;&gt;&gt; <a href="/san-pham/@category.MetaTitle-@category.ID" class="active">@category.Name</a></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            <div class="cont-desc span_1_of_2">
+                <div class="product-details">
+                    <div class="grid images_3_of_2">
+                        <img src="@Model.Image" alt="" />
+                    </div>
+                    <div class="desc span_3_of_2">
+                        <h2>@Model.Name</h2>
+                        <p>@Model.Description</p>
+                        <div class="price">
+                            <p><span class="rupees">@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")</span></p>
+                        </div>
+                        <div class="share-desc">
+                            <div class="share">
+                                <p>Số lượng:</p><input class="txtQuantity" data-id="@Model.ID" value="@Model.Quantity" type="text">
+                            </div>
+                            <div class="button"><span><a href="/them-gio-hang?productId=@Model.ID&quantity=1">Add to Cart</a></span></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="product_desc">
+                    <h2>Details :</h2>
+                    <p>@Html.Raw(Model.Detail)</p>
+                </div>
+            </div>
+            <div class="rightsidebar span_3_of_1 sidebar">
+                <h2>Đề xuất</h2>
+                @foreach (var item in recommenProduct)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="special_movies">
+                        <div class="movie_poster">
+                            <a href="@url"><img src="@item.Image" alt="" /></a>
+                        </div>
+                        <div class="movie_desc">
+                            <h3><a href="@url">@item.Name</a></h3>
+                            <p>
+                                <span>
+                                    @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")
+                                </span> &nbsp;@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")
+                            </p>
+                            <span><a href="/them-gio-hang?productId=@item.ID&quantity=1">Add to Cart</a></span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+

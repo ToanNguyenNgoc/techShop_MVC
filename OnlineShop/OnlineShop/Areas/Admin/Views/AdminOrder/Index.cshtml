@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<Model.EF.Order>
+@using PagedList.Mvc
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Danh sách đơn hàng</h1>
+    </div>
+    }
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        @using (Html.BeginForm("Index", "AdminOrder", FormMethod.Get))
+        {
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" value="@ViewBag.SearchString" class="form-control bg-light border-0 small" name="searchString" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Ngày đặt hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Xem đơn hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="row_@item.ID">
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ShipName</td>
+                        <td>@item.ShipMobile</td>
+                        <td>@item.ShipAddress</td>
+                        <td>@item.ShipEmail</td>
+                        <td>
+                            <a href="#">Chi tiết</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+    </div>
+</div>
+

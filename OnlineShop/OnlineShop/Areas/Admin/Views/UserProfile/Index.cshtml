@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Thông tin của  @Session["UserName"].ToString()</h1>
+    </div>
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thông tin</title>
+</head>
+<body>
+    <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+        <div class="container">
+            <div class="row d-flex no-gutters">
+                @*<div class="col-md-6 col-lg-6 d-flex">
+                    <div class="img-about img d-flex align-items-stretch">
+                        <div class="overlay"></div>
+                        <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(images/about.jpg);">
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-md-6 col-lg-6 d-flex">
+                    <div class="row justify-content-start pb-3">
+                        <div class="col-md-12 heading-section ftco-animate">
+                            <h1 class="big">Thông tin</h1>
+                            
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                            <ul class="about-info mt-4 px-md-0 px-2">
+                                <li class="d-flex"><span>Tên tài khoản:</span> <span> @Session["UserName"].ToString()</span></li>
+                                <li class="d-flex"><span>Tên người dùng:</span> <span> @Session["Name"].ToString()</span></li>
+                                <li class="d-flex"><span>Loại tài khoản:</span> <span> @Session["GroupID"].ToString()</span></li>
+                                <li class="d-flex"><span>Địa chỉ:</span> <span> @Session["Address"].ToString()</span></li>
+                                <li class="d-flex"><span>Email:</span> <span> @Session["Email"].ToString()</span></li>
+                                <li class="d-flex"><span>Điện thoại: </span> <span> @Session["Phone"].ToString()</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

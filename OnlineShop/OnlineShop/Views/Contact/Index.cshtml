@@ -1,0 +1,151 @@
+﻿@model Model.EF.Contact
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Menu{
+    <div class="header_bottom_left">
+        <div class="categories">
+            <ul>
+                @{
+                    Html.RenderAction("ProductCategory", "Product");
+                }
+            </ul>
+        </div>
+    </div>
+}
+@section jsFooter{
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        var contact = {
+            init: function () {
+                contact.registerEvents();
+            },
+            registerEvents: function () {
+                $('#btnSend').off('click').on('click', function () {
+                    var name = $('#txtName').val();
+                    var mobile = $('#txtMobile').val();
+                    var address = $('#txtAddress').val();
+                    var email = $('#txtEmail').val();
+                    var content = $('#txtContent').val();
+
+                    $.ajax({
+                        url: '/Contact/Send',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            name: name,
+                            mobile: mobile,
+                            address: address,
+                            email: email,
+                            content: content
+                        },
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.alert('Gửi thành công');
+                                contact.resetForm();
+                            }
+                        }
+                    });
+                });
+            },
+            resetForm: function () {
+                $('#txtName').val('');
+                $('#txtMobile').val('');
+                $('#txtAddress').val('');
+                $('#txtEmail').val('');
+                $('#txtContent').val('');
+            }
+        }
+        contact.init();
+    </script>
+    <script>
+        function initMap() {
+            var uluru = { lat: 10.879155, lng: 106.759898 };
+            var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 18,
+                center: uluru
+            });
+
+            var contentString = '@Html.Raw(Model.Content)';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Địa chỉ'
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+}
+<div class="contact-box-main">
+    <div class="container">
+        <div class="col-lg-8 col-sm-12">
+            <div class="contact-form-right">
+                <h2>GET IN TOUCH</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio justo, ultrices ac nisl sed, lobortis porta elit.</p>
+                <form class="contactForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtName" name="name" placeholder="Your Name" required data-error="Please enter your name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtMobile" name="name" placeholder="Phone Number" required data-error="Please enter your name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtAddress" name="name" placeholder="Address" required data-error="Please enter your name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="txtEmail" name="name" placeholder="Email" required data-error="Please enter your name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" id="txtContent" placeholder="Your Message" rows="4" data-error="Write your message" required></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="submit-button text-center">
+                                <button class="btn hvr-hover" id="btnSend" type="submit">Send Message</button>
+                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <div class="contact-info-left">
+                <h2>CONTACT INFO</h2>
+
+                <ul>
+                    <li>
+                        <p><i class="fas fa-map-marker-alt"></i>Address: @Html.Raw(Model.Content)</p>
+                    </li>
+                    <li>
+                        <p><i class="fas fa-phone-square"></i>Phone: <a>(+84) 392645745</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

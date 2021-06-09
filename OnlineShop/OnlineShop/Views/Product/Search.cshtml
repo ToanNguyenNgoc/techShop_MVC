@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Model.ViewModels.ProductViewModel>
+
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Menu{
+    <div class="header_bottom_left">
+        <div class="categories">
+            <ul>
+                @{
+                    Html.RenderAction("ProductCategory", "Product");
+                }
+            </ul>
+        </div>
+    </div>
+}
+<div class="wrap">
+    <div class="content">
+        <div class="content_top">
+            <div class="heading">
+                <h2>Kết quả tìm kiếm cho: @ViewBag.Keyword</h2>
+            </div>
+        </div>
+        <div class="section group">
+            @foreach (var item in Model)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="grid_1_of_5 images_1_of_5" style="width:220px; height:220px">
+                    <div class="products-single fix">
+                        <div class="box-img-hover" style="height:170px">
+                            <img src="@item.Image" class="img-fluid" alt="" />
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="@url" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="/them-vao-danh-sach-yeu-thich?productId=@item.ID&quantity=1" data-toggle="tooltip" data-placement="right" title="Add to wishlist"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="/them-gio-hang?productId=@item.ID&quantity=1" data-toggle="tooltip" data-placement="right" title="Add to cart"><i class="fa fa-cart-plus"></i></a></li>
+                                </ul>
+                                <a href="@url" class="cart">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</a>
+                            </div>
+                        </div>
+                        <h2><a style="font-size:15px" href="@url">@item.Name</a></h2>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+        <!--Phân trang-->
+        <div class="section group">
+            @if (ViewBag.TotalPage > 1)
+            {
+                var pageDisplay = (int)ViewBag.MaxPage;
+                int totalPage = (int)ViewBag.TotalPage;
+                int currentPage = ((int)ViewBag.Page);
+
+                // Create numeric links
+                var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                var link = "/tim-kiem?keyword=" + ViewBag.Keyword;
+                <nav>
+                    <ul class="pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li>
+                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                            </li>
+
+                        }
+                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                        {
+                            if (currentPage == i)
+                            {
+
+                                <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                            <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+
+                    </ul>
+                </nav>
+
+            }
+            else
+            {
+                <span></span>
+            }
+        </div>
+    </div>
+</div>
+

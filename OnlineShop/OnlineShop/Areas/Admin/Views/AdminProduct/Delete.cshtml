@@ -1,0 +1,56 @@
+﻿@model Model.EF.Product
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Thông tin sản phẩm</h1>
+    </div>
+    }
+    <div class="p-5">
+        
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Code)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Code)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MetaTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MetaTitle)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+                <dd>
+                    <img style="width:300px; border-radius:20px" src="@Html.DisplayFor(model=> model.Image)" />
+                </dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Xóa</button>
+                </div>
+            }
+        
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

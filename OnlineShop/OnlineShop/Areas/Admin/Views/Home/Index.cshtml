@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/Assets/Admin/Home/style.css" />
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+    @section header{
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Trang quản lý</h1>
+        </div>
+    }
+    <div class="metro">
+        <div class="l1">
+
+            <li class="item i1">
+                <i class="bi bi-person"></i>
+                <span><a href="@Url.Action("Index","UserProfile")" style="color:aliceblue;">Cá nhân</a></span>
+            </li>
+
+            <li class="item i2">
+                <i class="ion-ios-list"></i>
+                <span><a href="@Url.Action("Index","User")" style="color:aliceblue;">Danh sách người dùng</a></span>
+            </li>
+            <li class="item i7">
+                <i class="ion-ios-personadd-outline"></i>
+                <span><a href="@Url.Action("Create","User")" style="color:aliceblue;">Thêm người dùng</a></span>
+            </li>
+            <li class="item i9">
+                <i class="ion-compose"></i>
+                <span><a href="@Url.Action("Index","Content")" style="color:aliceblue;">Tin tức</a></span>
+            </li>
+        </div>
+
+        <div class="l2">
+            <li class="item i3">
+                <i class="ion-ios-plus-outline"></i>
+                <span><a href="@Url.Action("Create","ProductCategory")" style="color:aliceblue;">Thêm loại sản phẩm</a></span>
+            </li>
+
+            <li class="item i4">
+                <i class="ion-ios-list-outline"></i>
+                <span><a href="@Url.Action("Index","ProductCategory")" style="color:aliceblue;">Loại</a></span>
+            </li>
+
+            <li class="item i5">
+                <i class="ion-android-add-circle"></i>
+                <span><a href="@Url.Action("Create","AdminProduct")">Thêm sản phẩm</a></span>
+            </li>
+            <li class="item i6">
+                <i class="ion-android-list"></i>
+                <span><a href="@Url.Action("Index","AdminProduct")">Sản phẩm</a></span>
+            </li>
+        </div>
+        <div class="l2">
+            <li class="item i8">
+                <i class="ion-bag"></i>
+                <span><a href="@Url.Action("Index","AdminOrder")">Đơn hàng</a></span>
+            </li>
+            <li class="item i10">
+                <i class="ion-android-mail"></i>
+                <span><a href="@Url.Action("Index","AdminFeebBack")">Phản hồi từ khách hàng</a></span>
+            </li>
+            <li class="item i11">
+                <i class="ion-ios-home-outline"></i>
+                <span><a href="@Url.Action("Index","Home")">Home</a></span>
+            </li>
+        </div>
+    </div>
+</body>
+</html>

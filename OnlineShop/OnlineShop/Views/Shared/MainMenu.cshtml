@@ -1,0 +1,11 @@
+﻿@model List<Model.EF.Menu>
+<div class="account_desc">
+    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+        @foreach (var item in Model)
+        {
+            <li class="nav-item"><a class="nav-link" href="@item.Link" target="@item.Target">@item.Text</a></li>
+        }
+    </ul>
+</div>
+
+

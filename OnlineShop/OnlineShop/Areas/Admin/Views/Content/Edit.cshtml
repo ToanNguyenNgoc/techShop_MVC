@@ -1,0 +1,98 @@
+﻿@model Model.EF.Content
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Chỉnh sửa thông tin nội dung</h1>
+    </div>
+    } 
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace("Detail");
+            $("#btnSeclectImage").click(function () {
+                var finder = new CKFinder();
+                finder.seclectActionFunction = function (url) {
+                    $("#linkImage").val(url);
+                };
+                finder.popup();
+            });
+        });
+    </script>
+    }
+@using(Html.BeginForm("Edit","Content", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="p-5">
+        <form class="content">
+            <div class="form-group">
+                Trạng thái nội dung
+                <div class="custom-control custom-checkbox small">
+                    @Html.CheckBoxFor(model => model.Status, new { @class = "custom-control-input", @id = "customCheck" })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    <label class="custom-control-label" for="customCheck">Hoạt động</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    Tên nội dung
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    Tên tiêu đề
+                    @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    Mô tả
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                Nội dung
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" }, id = "Detail" })
+                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CategoryID, null, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                Chọn ảnh
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "linkImage" })
+                    <a id="btnSeclectImage" href="#">Mở trình quản lý</a>
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    Warranty
+                    @Html.EditorFor(model => model.Warranty, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    Meta Keywords
+                    @Html.EditorFor(model => model.MetaKeywords, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.MetaKeywords, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    Meta Descriptions
+                    @Html.EditorFor(model => model.MetaDescriptions, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.MetaDescriptions, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">Lưu thay đổi</button>
+        </form>
+    </div>
+}

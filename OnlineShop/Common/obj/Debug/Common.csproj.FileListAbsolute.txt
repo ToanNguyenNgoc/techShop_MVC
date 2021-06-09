@@ -1,0 +1,6 @@
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\bin\Debug\Common.dll
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\bin\Debug\Common.pdb
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\obj\Debug\Common.dll
+C:\Users\toan\source\repos\ASP_NET Fr\OnlineShop\Common\obj\Debug\Common.pdb

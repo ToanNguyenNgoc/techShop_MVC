@@ -1,0 +1,98 @@
+﻿@model Model.EF.Content
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Tạo thông nội dung!</h1>
+    </div>
+}
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckfinder/ckfinder.js"></script>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace("Content");
+            $("#seclectImage").click(function () {
+                var finder = new CKFinder();
+                finder.seclectActionFunction = function (url) {
+                    $("#txtImage").val(url);
+                };
+                finder.popup();
+            });
+        });
+    </script>
+}
+@using (Html.BeginForm("Create", "Content", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="p-5">
+        <form class="content">
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Tên nội dung" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Tiêu đề" } })
+                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Mô tả" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+            @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CategoryID, null, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                Nội dung
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" }, id = "Content" })
+                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                Chọn ảnh
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtImage" })
+                        <a id="seclectImage" href="#">Mở trình quản lý</a>
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    @Html.EditorFor(model => model.Warranty, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Warranty" } })
+                    @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.MetaKeywords, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Meta Keywords" } })
+                    @Html.ValidationMessageFor(model => model.MetaKeywords, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.MetaDescriptions, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Meta Descriptions" } })
+                    @Html.ValidationMessageFor(model => model.MetaDescriptions, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                Trạng thái
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.Status)
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">Tạo</button>
+        </form>
+    </div>
+}
+

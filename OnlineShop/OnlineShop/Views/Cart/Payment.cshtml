@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Thông tin thanh toán</title>
+        <link href="~/Assets/Admin/Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="~/Assets/Admin/Dashboard/css/sb-admin-2.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="card-body">
+                <div class="section group">
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                        {
+                            <div class="col-lg-12">
+                                <div class="p-10">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Thông tin nhận hàng</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input name="shipName" class="form-control form-control-user" placeholder="Tên người nhận" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="phone" class="form-control form-control-user" placeholder="Số điện thoại" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="address" class="form-control form-control-user" placeholder="Địa chỉ" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="email" class="form-control form-control-user" placeholder="Địa chỉ Email" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Gửi đơn hàng</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="~/Assets/Admin/Dashboard/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Assets/Admin/Dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Assets/Admin/Dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="~/Assets/Admin/Dashboard/js/sb-admin-2.min.js"></script>
+    </body>
+    </html>

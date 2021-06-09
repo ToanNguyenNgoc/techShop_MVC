@@ -1,0 +1,109 @@
+﻿@model Model.EF.Product
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Tạo mới sản phẩm</h1>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Create", "AdminProduct", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="p-5">
+        <form class="user">
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Tên sản phẩm" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Mã sản phẩm" } })
+                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Đường dẫn" } })
+                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Mô tả" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-3 mb-3 mb-sm-0">
+                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Hình ảnh" } })
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Giá sản phẩm" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.PromotionPrice, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Giảm giá" } })
+                    @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-1">Thuế</div>
+                <div class="col-sm-2">
+                    @Html.EditorFor(model => model.IncludedVAT, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Thuế VAT" } })
+                    @Html.ValidationMessageFor(model => model.IncludedVAT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">Số lượng</div>
+                <div class="col-sm-3">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-2">Loại sản phẩm</div>
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(model => model.CategoryID, null, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Thông tin sản phẩm" } })
+                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    Warranty
+                </div>
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Warranty, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                    @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                Người tạo
+                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                Trạng thái
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control form-control-user" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">Tạo</button>
+        </form>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

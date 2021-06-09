@@ -1,0 +1,25 @@
+﻿@model List<Model.EF.Menu>
+<div class="nav_list" style="color:green">
+    <ul>
+        @{
+            var session = Session[OnlineShop.Common.CommonConstants.USER_SESSION];
+        }
+        @if (session == null)
+        {
+            foreach (var item in Model)
+            {
+                <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+            }
+        }
+        else
+        {
+            <li>
+                <a>Chào mừng : @Session["UserName"].ToString()!</a>
+            </li>
+            <li>
+                <a>@Html.ActionLink("Thoát", "Logout", "User")</a>
+            </li>
+        }
+
+    </ul>
+</div>

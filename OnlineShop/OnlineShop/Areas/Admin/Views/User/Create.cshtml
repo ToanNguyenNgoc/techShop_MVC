@@ -1,0 +1,120 @@
+﻿@model Model.EF.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>THêm mới người dùng</title>
+</head>
+<body>
+    @section header{
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Tạo thông tin!</h1>
+        </div>
+    }
+    @using (Html.BeginForm("Create", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="p-5">
+            
+            <form class="user">
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        @Html.EditorFor(model => model.UserName, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control form-control-user",
+                           @placeholder = "Tên tài khoản"
+                       }
+                   })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Mật khẩu" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    Loại tài khoản:
+                    @Html.DropDownListFor(model => model.GroupID,null, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Group ID" } })
+                    @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Họ và tên" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Địa chỉ" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Số điện thoại" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        @Html.EditorFor(model => model.ProvinceID, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "ProvinceID" } })
+                        @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.EditorFor(model => model.DistrictID, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "DistrictID" } })
+                        @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 mb-3 mb-sm-0">
+                        @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Ngày tạo" } })
+                        @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Tạo bởi" } })
+                        @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "ModifiedDate" } })
+                        @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-3">
+                        @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "ModifiedBy" } })
+                        @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    Trạng thái
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.Status)
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Tạo" class="btn btn-primary btn-user btn-block" />
+                    </div>
+                </div>*@
+                <button type="submit" class="btn btn-primary btn-user btn-block" >Tạo</button>
+
+            </form>
+
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

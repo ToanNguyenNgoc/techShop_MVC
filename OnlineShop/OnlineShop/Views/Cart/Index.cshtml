@@ -1,0 +1,153 @@
+﻿@model List<OnlineShop.Models.CartItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal TotalPrice = 0;
+}
+@section Menu{
+    <div class="header_bottom_left">
+        <div class="categories">
+            <ul>
+                @{
+                    Html.RenderAction("ProductCategory", "Product");
+                }
+            </ul>
+        </div>
+    </div>
+}
+@section jsFooter{
+    <script>
+        var cart = {
+            init: function () {
+                cart.regEvents();
+            },
+            regEvents: function () {
+                $('#btnContinue').off('click').on('click', function () {
+                    window.location.href = "/";
+                });
+                $('#btnUpadte').off('click').on('click', function () {
+                    var listProduct = $('.txtQuantity');
+                    var cartList = [];
+                    $.each(listProduct, function (i, item) {
+                        cartList.push({
+                            Quantity: $(item).val(),
+                            Product: {
+                                ID: $(item).data('id')
+                            }
+                        });
+                    });
+                    $.ajax({
+                        url: 'Cart/Update',
+                        data: { cartModel: JSON.stringify(cartList) },
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/gio-hang";
+                            }
+                        }
+                    })
+                });
+                $('#btnDeleteAll').off('click').on('click', function () {
+                    $.ajax({
+                        url: '/Cart/DeleteAll',
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/gio-hang";
+                            }
+                        }
+                    })
+                });
+                $('.btn-delete').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        data: { id: $(this).data('id') },
+                        url: '/Cart/Delete',
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/gio-hang";
+                            }
+                        }
+                    })
+                });
+                $('#btnPayment').off('click').on('click', function () {
+                    window.location.href = "/thanh-toan";
+                });
+            }
+        }
+        cart.init();
+    </script>
+}
+<link href="~/Assets/Admin/Dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="~/Assets/Admin/Dashboard/css/sb-admin-2.min.css" rel="stylesheet" />
+
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                TotalPrice += ((item.Product.Price.GetValueOrDefault(0) * item.Quantity));
+                                <tr>
+                                    <td class="thumbnail-img">
+                                        <img class="img-fluid" src="@item.Product.Image" />
+                                    </td>
+                                    <td class="name-pr">
+                                        @item.Product.Name
+                                    </td>
+                                    <td class="total-pr">
+                                        @item.Product.Price
+                                    </td>
+                                    <td class="quantity-box">
+                                        <input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" />
+                                    </td>
+                                    <td class="total-pr">
+                                        @((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))
+                                    </td>
+                                    <td><a href="#" data-id="@item.Product.ID" class="btn-delete"><i class="far fa-trash-alt"></i></a></td>
+                                </tr>
+
+                            }
+                            <tr>
+                                <td colspan="4">
+                                    <h2 style="color:forestgreen">Total Amount:</h2>
+                                </td>
+                                <td>
+                                    <h5 style="color:darkslategrey">@TotalPrice.ToString("#,##0 VND")</h5>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2 mb-0 mb-sm-0">
+                <button id="btnContinue" type="button" class="btn btn-primary">Continue Shopping</button>
+            </div>
+            <div class="col-sm-2">
+                <button id="btnUpadte" type="button" class="btn btn-info">Update Cart</button>
+            </div>
+            <div class="col-sm-3">
+                <button id="btnPayment" type="button" class="btn btn-info">Payment</button>
+            </div>
+        </div>
+    </div>
+</div>

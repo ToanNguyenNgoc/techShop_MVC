@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <div>
+        <textarea id="noiDung"></textarea>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var editor = CKEDITOR.replace('noiDung');
+    });
+</script>
